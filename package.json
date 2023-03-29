@@ -4,8 +4,12 @@
   "description": "a party game about ranking people",
   "main": "webpack.config.js",
   "scripts": {
+    "start": "nodemon server/server.js",
+    "build": "webpack --mode production",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --open"
+    "start1": "PORT=3000 webpack serve --mode development",
+    "start2": "PORT=3001 webpack serve --mode development",
+    "websocket": "server/serverl.js"
   },
   "repository": {
     "type": "git",
@@ -18,14 +22,21 @@
   },
   "homepage": "https://github.com/Djaworski1/Rank-d#readme",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.9.3",
     "copy-webpack": "^2.0.5",
     "express": "^4.18.2",
+    "express-ws": "^5.0.2",
     "nodemon": "^2.0.22",
     "plugin": "^0.3.3",
     "react": "^18.2.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.5",
-    "redux": "^4.2.1"
+    "redux": "^4.2.1",
+    "sass": "^1.59.3",
+    "socket.io": "^4.6.1",
+    "ws": "^8.13.0"
   },
   "devDependencies": {
     "@babel/core": "^7.21.3",
@@ -34,6 +45,7 @@
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^9.1.2",
+    "concurrently": "^7.6.0",
     "copy-webpack-plugin": "^11.0.0",
     "css-loader": "^6.7.3",
     "html-loader": "^4.2.0",

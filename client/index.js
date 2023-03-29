@@ -1,13 +1,14 @@
-import React from 'react';
-import { render } from 'react-dom';
-import { Provider } from 'react-redux';
 import App from './App.jsx';
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
 import store from './store';
 
-render(
-  // wrap the App in the Provider Component and pass in the store
+import styles from './scss/application.scss'
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
   <Provider store={store}>
-    <App />
-  </Provider>,  
-  document.getElementById('contents')
+        <App />
+  </Provider>
 );

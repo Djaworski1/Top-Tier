@@ -3,15 +3,18 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Rank'd</title>
-        <h1>Rank'd</h1>
-        <h2>a party game about ranking people</h2>
-        <link rel="stylesheet" href="client/styles.css">
+        <!-- <script defer="defer" src="/dist/bundle.js"></script> -->
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();
+        </script>
+        <link rel="stylesheet" type="text/scss" href="client/scss/application.scss">
     </head>
     <body>
         <!-- Hang React App Here -->
-        <div id="contents"></div>
+        <div id="root"></div>
         <!-- LOAD SCRIPTS -->
-        <script type="text/javascript" src="./dist/bundle.js"></script>
+        <!-- <script type="text/javascript" src="./dist/bundle.js"></script> -->
+        <script>  </script>
     </body>
 </html>
