@@ -5,18 +5,22 @@ import { connect } from 'react-redux';
 const mapStateToProps = state => (
     {
         cardsObj: state.cards.cardsObj,
+        selection: state.cards.selection,
     }
 )
 
 const Row = props => {
     const row = props.row
     const cardsArr = [];
-    console.log(props.cardsObj[row])
-
-    
+    const { cardsObj, selection } = props
 
     for (let i = 1; i <= 5; i++) {
-        cardsArr.push(<Card key={'card' + i} row={row} card={i} contents={props.cardsObj[row][i]}/>)
+        cardsArr.push(<Card key={'card' + i} 
+        row={row} 
+        card={i} 
+        contents={cardsObj[row][i]['contents']} 
+        selected={cardsObj[row][i]['selected']}
+        selection={selection}/>)
     };
 
     return (

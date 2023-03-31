@@ -1,10 +1,16 @@
 import * as type from '../actionTypes/actionTypes.js';
 
-export const choosePerson = contents => ({
-    type: types.choosePerson,
-    payload: contents
+export const choosePerson = array => ({
+    type: type.CHOOSE_PERSON,
+    payload: array
 });
 
-export const dropPerson = {
-    type: types.dropPerson,
-};
+export const dropPerson = (array) => ({
+    type: type.DROP_PERSON,
+    payload: array
+});
+
+export const pullSelections = (array) => ({
+    type: type.LOAD_SELECTIONS,
+    payload: array
+})
