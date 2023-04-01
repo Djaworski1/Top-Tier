@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import * as actions from '../actions/actions';
 
+
 const mapDispatchToProps = dispatch => (
     {
         choosePerson: (array) => dispatch(actions.choosePerson(array)),
@@ -11,7 +12,7 @@ const mapDispatchToProps = dispatch => (
 
 const Card = props => {
     const { row, card, contents, selected, selection, choosePerson, dropPerson } = props;
-    
+
     const selectOrDropCard = (e) => {
         e.preventDefault();
         if (!selection) {

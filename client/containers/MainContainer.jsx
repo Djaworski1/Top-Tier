@@ -3,10 +3,19 @@ import Row from './Row.jsx'
 import SelectRow from './SelectionRow.jsx';
 import {socket} from '../socket'
 import {connect} from 'react-redux';
+import * as actions from '../actions/actions';
 
-const mapDispatchToProps = state => (
+const mapDispatchToProps = dispatch => (
     {
         loadSelections: (array) => dispatch(actions.loadSelections(array)),
+        submitBoard: () => dispatch(actions.submitBoard()),
+        loadCategory: (category) => dispatch(actions.loadCategory(category))
+    }
+)
+const mapStateToProps = state => (
+    {
+        score: state.cards.score,
+        category: state.cards.category,
     }
 )
 
@@ -20,19 +29,31 @@ const MainContainer = props => {
     };
 
     useEffect(() => {
-        fetch('/getAllPeople')
-            .then(res => res.json())
-            .then(data => console.log(data))
-            .then(data => props.loadSelections(data))
+        fetch('/people/getAllPeople', {
+            headers: { 'Content-Type': 'application/json' },
+          })
+        .then(res => res.json())
+        .then(res => {
+            props.loadSelections(res['people'])
+            props.loadCategory(res['category'])
+        })
+        
     }, [])
+    
+    const submitHandler = (e) => {
+        e.preventDefault()
+        props.submitBoard()
+    }
     
     // console.log(people)
 
     return(
         <div>
             <div className='header'>
-                <h1>{'Rank\'d'}</h1>
-                {/* <h2>a party game about ranking people</h2> */}
+                <h1>{'RANK\'D'}</h1>
+            </div>
+            <div className='header'>
+                <h2>{`Your Category is... ${props.category}`}</h2>
             </div>
             <div className='cardsContainer'>
                 {rowArr}
@@ -40,9 +61,10 @@ const MainContainer = props => {
             <div className='selectionContainer'>
                 <SelectRow key={'selectionRow'} row={'select'}/>
             </div>
-            <button style={{height: '100px', width: '100px'}} onClick={()=> {fetch('/updateState').then(data => console.log(data.json()))}}></button>
+            <div>{props.score > 0 ? <div>{props.score}</div> : <div></div>}</div>
+            <button style={{height: '100px', width: '100px'}} onClick={submitHandler}>Submit choices!</button>
         </div>
     )
 }
 
-export default MainContainer;
+export default connect(mapStateToProps, mapDispatchToProps) (MainContainer);

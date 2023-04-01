@@ -46,10 +46,7 @@ module.exports = {
     },
     hot: true,
     proxy: {
-        '/updateState': {
-            target: 'http://localhost:3000/',
-            secure: false,
-        }
+        '/people': 'http://localhost:3000/'
       },
   },
   

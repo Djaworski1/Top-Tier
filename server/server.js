@@ -10,7 +10,8 @@ const http = require('http');
 const { Server } = require('socket.io');
 const server = http.createServer(app);
 
-const personController = require('./controller/peopleController')
+const personController = require('./controller/peopleController');
+const categoryController = require('./controller/categoryController');
 
 const mongoURI = process.env.NODE_ENV === 'test' ? 'mongodb://localhost/Rank-dtest' : 'mongodb://localhost/Rank-ddev';
 mongoose.connect(mongoURI);
@@ -38,11 +39,15 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/', express.static(path.join(__dirname, '../dist')))
 
 
-app.get('/getAllPeople', personController.getAllPeople, (req, res) => {
-    res.status(200).json({people: res.locals.people})
+app.get('/people/getAllPeople', personController.getAllPeople, categoryController.getRandomCategory, (req, res) => {
+    res.status(200).json({people: res.locals.people, category: res.locals.category})
 })
 
-app.post('/addAllPeople', personController.addPeople, (req, res) => {
+app.post('/people/addAllPeople', personController.addPeople, (req, res) => {
+    res.sendStatus(200)
+})
+
+app.post('/people/addAllCategories', categoryController.addCategory, (req, res) => {
     res.sendStatus(200)
 })
 
