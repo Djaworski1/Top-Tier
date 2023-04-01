@@ -277,6 +277,32 @@ const cardsReducer = (state = initialState, action) => {
                 ...state,
                 category
             }
+        
+        case types.ADD_CHOICE:
+
+            if (!selection) {
+                window.alert('Pick a person to replace')
+            } else {
+                currSelections[selection.card]['contents'] = action.payload
+                cardsObj[selection.row][selection.card]['selected'] = false
+                cardsObj[selection.row][selection.card]['contents'] = action.payload;
+                selection = null
+                fetch('/people/addAllPeople', {
+                    method: 'POST', 
+                    mode: 'cors',
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({people: [action.payload]})
+                })
+            }
+            
+            return {
+                ...state,
+                cardsObj,
+                selection,
+                currSelections
+            }
 
         default: {
             return state

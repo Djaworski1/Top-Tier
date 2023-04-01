@@ -27,3 +27,8 @@ export const loadCategory = (category) => ({
     type: type.LOAD_CATEGORY,
     payload: category,
 })
+
+export const addChoice = (contents) => ({
+    type: type.ADD_CHOICE, 
+    payload: contents,
+})
