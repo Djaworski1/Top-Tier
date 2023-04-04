@@ -18,10 +18,7 @@ categoryController.addCategory = async(req,res, next) => {
     // console.log(people)
 
     for (let i = 0; i < categories.length; i++) {
-        // console.log(person)
-        // await Category.create({"category": categories[i]})
-        // console.log(await Person.deleteMany())
-        // console.log(await Person.create({"name": people[i]}))
+        await Category.create({"category": categories[i]})
     }
 
     return next()

@@ -58,7 +58,9 @@ const MainContainer = props => {
         console.log(inputContents)
     }
     
-    // console.log(people)
+    socket.on('connection', () => {
+        console.log('front connected')
+    })
 
     return(
         <div>
@@ -67,7 +69,8 @@ const MainContainer = props => {
             </div>
             <div className='header'>
                 <h2>{`Your Category is... ${props.category}`}</h2>
-                <h2>{props.score > 0 ? <div style={{border: 'solid grey'}}>Your score IS!!! {props.score}</div> : <div></div>}</h2>
+                <h3>Place each person where you think they rank in the category</h3>
+                <h2>{props.score > 0 ? <div style={{border: 'solid grey'}}>Correct rankings = {props.score}</div> : <div></div>}</h2>
             </div>
             <div className='cardsContainer'>
                 {rowArr}
@@ -76,14 +79,15 @@ const MainContainer = props => {
                 <SelectRow key={'selectionRow'} row={'select'}/>
             </div>
             <div className='ActionsContainer'>
-                <h2 style={{"fontSize": '18px'}}>Choose the selection you'd like to replace and hit "Add a Choice"</h2>
+                <h2 style={{"fontSize": '18px'}}>Choose the selection you'd like to replace and hit "Enter"</h2>
                 <div className='addOrDeleteContainer'>
-                    <input ref={inputContents} type="text" onChange={onChangeHandler}/>
-                    <button style={{color: "white", background: 'black', border: 'solid grey'}} type="button" onClick={addHandler}>Add a choice!</button>
+                    <input id='button' style={{color: 'white', background: 'black',  border: 'solid grey'}} ref={inputContents} type="text" onChange={onChangeHandler}/>
+                    <button id='button' style={{color: "white", background: 'black', border: 'solid grey'}} type="button" onClick={addHandler}>Enter</button>
                 </div>
+                <div style={{height: "20px"}}/>
                 <div className='scoreContainer'>
                     <div></div>
-                    <button style={{height: '50px', width: '100px'}} onClick={submitHandler}>Submit choices!</button>
+                    <button id='button' style={{height: '50px', width: '100px', color: "white", background: 'black', border: 'solid grey'}} onClick={submitHandler}>Submit choices!</button>
                 </div>
             </div>
         </div>

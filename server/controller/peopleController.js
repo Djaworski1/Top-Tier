@@ -3,10 +3,19 @@ const Person = require('../model/personModel.js');
 const personController = {};
 
 personController.getAllPeople = async (req, res, next) => {
-    const people = await Person.find()
+
+    const count = await Person.count()
+    
     const peopleArr = [];
-    for (let i = 0; i < people.length; i++) {
-        peopleArr.push(people[i]['name'])
+    const randomArr = [];
+    for (let i = 0; i < 8; i++) {
+        let random = Math.floor(Math.random() * count);
+        while (randomArr.includes(random)) {
+            random = Math.floor(Math.random() * count);
+        }
+        randomArr.push(random)
+        person = await Person.findOne().skip(random)
+        peopleArr.push(person['name'])
     }
     res.locals.people = peopleArr;
 
@@ -15,14 +24,9 @@ personController.getAllPeople = async (req, res, next) => {
 
 personController.addPeople = async(req,res, next) => {
     const people = req.body["people"]
-    
-    // console.log(people)
 
     for (let i = 0; i < people.length; i++) {
-        // console.log(person)
-        // await Person.create({"name": person})
-        // console.log(await Person.deleteMany())
-        // console.log(await Person.create({"name": people[i]}))
+        await Person.create({"name": people[i]})
     }
 
     return next()
